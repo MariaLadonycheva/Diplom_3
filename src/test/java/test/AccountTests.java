@@ -16,6 +16,9 @@ import page.LoginPage;
 import page.MainPage;
 import page.RegisterPage;
 import io.restassured.response.Response;
+
+import java.net.MalformedURLException;
+
 import static org.junit.Assert.assertTrue;
 
 public class AccountTests {
@@ -29,10 +32,9 @@ public class AccountTests {
     private ProfilePage profilePage;
 
     @Before
-    public void setUpAccount() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(new String[]{"--no-sandbox", "--disable-dev-shm-usage"});
-        driver = new ChromeDriver(options);
+    public void setUpAccount() throws MalformedURLException {
+        String browser = System.getProperty("browser", "chrome"); // Get browser from system property
+        driver = BrowserFactory.createDriver(browser);
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         registerPage = new RegisterPage(driver);

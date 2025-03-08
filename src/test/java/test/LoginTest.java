@@ -17,6 +17,8 @@ import page.ForgotPasswordPage;
 import io.restassured.response.Response;
 import util.UserGenerator;
 
+import java.net.MalformedURLException;
+
 import static org.junit.Assert.assertTrue;
 
 public class LoginTest {
@@ -32,10 +34,9 @@ public class LoginTest {
 
     @Before
     @Step("Setup: Create user via API, open main page")
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(new String[]{"--no-sandbox", "--disable-dev-shm-usage"});
-        driver = new ChromeDriver(options);
+    public void setUp() throws MalformedURLException {
+        String browser = System.getProperty("browser", "chrome"); // Get browser from system property
+        driver = BrowserFactory.createDriver(browser);
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         registerPage = new RegisterPage(driver);

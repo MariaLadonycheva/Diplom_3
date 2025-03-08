@@ -9,16 +9,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import page.MainPage;
+
+import java.net.MalformedURLException;
+
 import static org.junit.Assert.assertTrue;
 
 public class ConstructorTests {
     private WebDriver driver;
     private MainPage mainPage;
     @Before
-    public void setUpConstructor() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(new String[]{"--no-sandbox", "--disable-dev-shm-usage"});
-        driver = new ChromeDriver(options);
+    public void setUpConstructor() throws MalformedURLException {
+        String browser = System.getProperty("browser", "chrome"); // Get browser from system property
+        driver = BrowserFactory.createDriver(browser);
         mainPage = new MainPage(driver);
         mainPage.openMainPage();
     }

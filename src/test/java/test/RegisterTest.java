@@ -14,6 +14,9 @@ import page.LoginPage;
 import page.MainPage;
 import page.RegisterPage;
 import util.UserGenerator;
+
+import java.net.MalformedURLException;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -29,10 +32,9 @@ public class RegisterTest {
 
     @Before
     @Step("Setup: Open main page, initialize driver and page objects")
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(new String[]{"--no-sandbox", "--disable-dev-shm-usage"});
-        driver = new ChromeDriver(options);
+    public void setUp() throws MalformedURLException {
+        String browser = System.getProperty("browser", "chrome"); // Get browser from system property
+        driver = BrowserFactory.createDriver(browser);
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         registerPage = new RegisterPage(driver);
