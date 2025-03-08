@@ -8,8 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import page.LoginPage;
 import page.MainPage;
 import page.RegisterPage;
@@ -33,7 +31,7 @@ public class RegisterTest {
     @Before
     @Step("Setup: Open main page, initialize driver and page objects")
     public void setUp() throws MalformedURLException {
-        String browser = System.getProperty("browser", "chrome"); // Get browser from system property
+        String browser = System.getProperty("browser", "chrome");
         driver = BrowserFactory.createDriver(browser);
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);

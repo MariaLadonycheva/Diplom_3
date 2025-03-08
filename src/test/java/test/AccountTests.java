@@ -4,8 +4,6 @@ import io.qameta.allure.Step;
 import model.User;
 import client.UserClient;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import page.ProfilePage;
 import util.UserGenerator;
 import io.qameta.allure.junit4.DisplayName;
@@ -33,7 +31,7 @@ public class AccountTests {
 
     @Before
     public void setUpAccount() throws MalformedURLException {
-        String browser = System.getProperty("browser", "chrome"); // Get browser from system property
+        String browser = System.getProperty("browser", "chrome");
         driver = BrowserFactory.createDriver(browser);
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
@@ -42,7 +40,6 @@ public class AccountTests {
         user = UserGenerator.generateRandomUser();
         Response response = userClient.createUser(user);
         accessToken = response.path("accessToken");
-
         mainPage.openMainPage();
         mainPage.clickLoginButton();
         loginPage.fillEmailField(user.getEmail())
@@ -68,45 +65,34 @@ public class AccountTests {
 
 
     @Test
-    @DisplayName("Переход в личный кабинет")
+    @DisplayName("Go to account")
     public void goToAccount() {
-
         mainPage.clickPersonalAccountButton();
-
         assertTrue("Переход в личный кабинет не удался", profilePage.isProfilePageOpen());
     }
 
     @Test
-    @DisplayName("Выход из аккаунта из личного кабинета")
+    @DisplayName("Logout from account")
     public void logoutFromAccount() {
         mainPage.clickPersonalAccountButton();
         profilePage.clickLogoutButton();
-
         assertTrue("Выход из аккаунта не удался", profilePage.isLogoutSuccessful()); // Проверяем успешность выхода
     }
 
     @Test
-    @DisplayName("Переход из личного кабинета в конструктор по клику на Конструктор")
+    @DisplayName("Go to constructor from account by constructor button")
     public void goToConstructorFromAccountByConstructorButton() {
-
         mainPage.clickPersonalAccountButton();
-
         mainPage.clickConstructorButton();
-
         assertTrue("Переход в конструктор не удался", mainPage.isConstructorPageOpen());
     }
 
 
     @Test
-    @DisplayName("Переход из  личного кабинета в конструктор по клику на логотип")
+    @DisplayName("Go to constructor from account by logo")
     public void goToConstructorFromAccountByLogo() {
-
-
         mainPage.clickPersonalAccountButton();
         mainPage.clickStellarBurgersLogo();
-
         assertTrue("Переход в конструктор не удался", mainPage.isConstructorPageOpen());
         }
-
-
 }

@@ -32,7 +32,7 @@ public class RegisterPage {
     public RegisterPage fillNameField(String name) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement label = wait.until(ExpectedConditions.presenceOfElementLocated(labelName));
-        WebElement nameElement = label.findElement(By.xpath("./following-sibling::input")); // Ищем input внутри label
+        WebElement nameElement = label.findElement(By.xpath("./following-sibling::input"));
         nameElement.click();
         nameElement.sendKeys(name);
         return this;
@@ -42,7 +42,7 @@ public class RegisterPage {
     public RegisterPage fillEmailField(String email) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement label = wait.until(ExpectedConditions.presenceOfElementLocated(labelEmail));
-        WebElement emailElement = label.findElement(By.xpath("./following-sibling::input")); // Ищем input внутри label
+        WebElement emailElement = label.findElement(By.xpath("./following-sibling::input"));
         emailElement.click();
         emailElement.sendKeys(email);
 
@@ -53,7 +53,7 @@ public class RegisterPage {
     public RegisterPage fillPasswordField(String password) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement label = wait.until(ExpectedConditions.presenceOfElementLocated(labelPassword));
-        WebElement passwordElement = label.findElement(By.xpath("./following-sibling::input")); // Ищем input внутри label
+        WebElement passwordElement = label.findElement(By.xpath("./following-sibling::input"));
         passwordElement.click();
         passwordElement.sendKeys(password);
 

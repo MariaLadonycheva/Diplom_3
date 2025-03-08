@@ -6,8 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import page.MainPage;
 
 import java.net.MalformedURLException;
@@ -19,20 +17,20 @@ public class ConstructorTests {
     private MainPage mainPage;
     @Before
     public void setUpConstructor() throws MalformedURLException {
-        String browser = System.getProperty("browser", "chrome"); // Get browser from system property
+        String browser = System.getProperty("browser", "chrome");
         driver = BrowserFactory.createDriver(browser);
         mainPage = new MainPage(driver);
         mainPage.openMainPage();
     }
     @Test
-    @DisplayName("Переход к разделу 'Соусы'")
+    @DisplayName("Go to 'Sauces' section")
     public void goToSaucesSection() {
         mainPage.clickSaucesSectionButton();
 
         assertTrue("Переход к разделу 'Соусы' не удался: заголовок 'Соусы' не отображается", mainPage.isSaucesHeaderVisible());
     }
     @Test
-    @DisplayName("Переход к разделу 'Булки'")
+    @DisplayName("Go to 'Buns' section")
     public void goToBunsSection() {
         mainPage.clickSaucesSectionButton();
         mainPage.clickBunsSectionButton();
@@ -41,7 +39,7 @@ public class ConstructorTests {
     }
 
     @Test
-    @DisplayName("Переход к разделу 'Начинки'")
+    @DisplayName("Go to 'Filling' section")
     public void goToFillingSection() {
 
         mainPage.clickFillingsSectionButton();
